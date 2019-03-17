@@ -1,0 +1,24 @@
+<svelte:component this="{component}" {...params} />
+
+<script>
+  import { onMount, onDestroy } from 'svelte'
+  import pagejs from 'page'
+
+  import Index from './pages/index/Index.html'
+
+  const page = pagejs.create()
+
+  let component = Index
+  let params = {}
+
+  page('*', _params => {
+    params = _params
+  })
+
+  page('/', () => {
+    component = Index
+  })
+
+  onMount(() => page.start())
+  onDestroy(() => page.stop())
+</script>
